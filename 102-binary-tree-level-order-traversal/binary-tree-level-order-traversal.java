@@ -17,10 +17,16 @@ class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> list = new ArrayList<>();
 
-        if (root == null) return list;
+        traverse (root, list);
+        
+        return list;
+    }
+
+    public void traverse (TreeNode root, List<List<Integer>> list) {
+        if (root == null) return;
 
         Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
+        queue.add(root);
 
         while (!queue.isEmpty()) {
             List<Integer> nodeList = new ArrayList<>();
@@ -34,6 +40,5 @@ class Solution {
             }
             list.add(new ArrayList<>(nodeList));
         }
-        return list;
     }
 }
