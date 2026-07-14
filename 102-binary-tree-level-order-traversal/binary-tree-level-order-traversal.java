@@ -36,7 +36,7 @@ class Solution {
                 if (current.left != null) queue.offer(current.left);
                 if (current.right != null) queue.offer(current.right);
             }
-            list.add(new ArrayList<>(nodeList));
+            list.add(nodeList);
         }
     }
 }
