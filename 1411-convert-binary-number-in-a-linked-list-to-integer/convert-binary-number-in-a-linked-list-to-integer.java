@@ -10,22 +10,20 @@
  */
 class Solution {
     public int getDecimalValue(ListNode head) {
-        StringBuilder sb = new StringBuilder();
+        List<Integer> list = new ArrayList<>();
         ListNode temp = head;
 
         while (temp != null) {
-            sb.append(temp.val);
+            list.add(temp.val);
             temp = temp.next;
         }
 
-        String s = sb.toString();
-        int ex = 0;
+        int pow = 1;
         int result = 0;
 
-        for (int i = s.length() - 1; i >= 0; i--) {
-            int binary = s.charAt(i) - '0';
-
-            result += binary * (int)Math.pow(2, ex++);
+        for (int i = list.size() - 1; i >= 0; i--) {
+            if (list.get(i) != 0) result += pow;
+            pow *= 2;
         }
         return result;
     }
