@@ -1,18 +1,23 @@
 class Solution {
     public String sortVowels(String s) {
-        PriorityQueue<Character> pq = new PriorityQueue<>((a, b) -> a - b);
+        List<Character> list = new ArrayList<>();
 
-        char[] chars = s.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            if (chars[i] == 'a' || chars[i] == 'e' || chars[i] == 'i' || chars[i] == 'o' || chars[i] == 'u' || chars[i] == 'A' || chars[i] == 'E' || chars[i] == 'I' || chars[i] == 'O' || chars[i] == 'U') {
-                pq.offer(chars[i]);
-                chars[i] = '-';
-            }
+        for (char ch : s.toCharArray()) {
+            if (isVowel(ch)) list.add(ch);
         }
+        Collections.sort(list);
+        StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < chars.length; i++) {
-            if (chars[i] == '-') chars[i] = pq.poll();
+        int k = 0;
+
+        for (char ch : s.toCharArray()) {
+            if (isVowel(ch)) sb.append(list.get(k++));
+            else sb.append(ch);
         }
-        return new String(chars);
+        return sb.toString();
+    }
+    private boolean isVowel(char ch) {
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' || ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U') return true;
+        return false;
     }
 }
