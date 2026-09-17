@@ -1,18 +1,18 @@
 class Solution {
     public String[] findRelativeRanks(int[] score) {
-        int n = score.length;
-        String[] rank = new String[n];
-
-        for (int i = 0; i < n; i++) {
-            int count = 1;
-            for (int j = 0; j < n; j++) {
-                if (score[j] > score[i]) count++;
-            }
-            if (count == 1) rank[i] = "Gold Medal";
-            else if (count == 2) rank[i] = "Silver Medal";
-            else if (count == 3) rank[i] = "Bronze Medal";
-            else rank[i] = Integer.toString(count);
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> b[0] - a[0]);
+        for(int i =0;i < score.length;i++) {
+            pq.offer(new int[] {score[i],i});
         }
-        return rank;
+        int k = 1;
+        String[] ans = new String[score.length];
+        while(!pq.isEmpty()) {
+            if(k == 1) ans[pq.poll()[1]] = "Gold Medal";
+            else if(k == 2) ans[pq.poll()[1]] = "Silver Medal";
+            else if(k == 3) ans[pq.poll()[1]] = "Bronze Medal";
+            else ans[pq.poll()[1]] = Integer.toString(k);
+            k++;
+        }
+        return ans;
     }
 }
