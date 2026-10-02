@@ -6,20 +6,21 @@ class Solution {
 
         return ans;
     }
-    private void generate(int n, int left, int right, StringBuilder sb, List<String> ans) {
+    private void generate(int n, int left, int right, StringBuilder sb, List<String> list) {
         if (sb.length() == 2 * n) {
-            ans.add(sb.toString());
+            list.add(sb.toString());
             return;
         }
 
         if (left < n) {
             sb.append('(');
-            generate(n, left + 1, right, sb, ans);
+            generate (n, left + 1, right, sb, list);
             sb.deleteCharAt(sb.length() - 1);
         }
-        if (right< left) {
+
+        if (right < left) {
             sb.append(')');
-            generate(n, left, right + 1, sb, ans);
+            generate(n, left, right + 1, sb, list);
             sb.deleteCharAt(sb.length() - 1);
         }
     }
